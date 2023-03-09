@@ -4,7 +4,7 @@
       <div style="margin: 20px 0; text-align: center; font-size: 24px"><b>登 录</b></div>
       <el-form :model="user" :rules="rules" ref="userForm">
         <el-form-item prop="username">
-          <el-input size="medium" style="margin: 10px 0" prefix-icon="el-icon-user" v-model="user.username"></el-input>
+          <el-input size="medium" style="margin: 10px 0" prefix-icon="el-icon-user" v-model="user.email"></el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input size="medium" style="margin: 10px 0" prefix-icon="el-icon-lock" show-password v-model="user.password"></el-input>
@@ -19,16 +19,14 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default{
     name:"Login",
     data(){
         return{
             user:{},
             rules: {
-            username: [
-                { required: true, message: '请输入用户名', trigger: 'blur' },
+            email: [
+                { required: true, message: '请输入邮箱', trigger: 'blur' },
                 { min: 3, message: '长度至少 3  个字符', trigger: 'blur' }
             ],
             password: [
@@ -40,8 +38,29 @@ export default{
     },
     methods: {
       login(){
-        
-      }
+        this.$refs['userForm'].validate((valid) => {
+           if (valid) {  // 表单校验合法
+            this.request({
+              method: 'POST',
+              url: 'users/login',
+              data: {
+              email:this.user.email,
+              password:this.user.password
+            }
+          }).then(res => {
+            if(res.state!=200){
+              this.$message.error("用户名或密码错误")
+            }else{
+              this.$message.success("登录成功")
+              localStorage.setItem("user", JSON.stringify(res.data))  // 存储用户信息到浏览器
+              this.$router.push("/")
+              // console.log(router)
+            }
+          })
+          }else{
+            return false;
+          }
+        })
     // {
     // login() {
     //   this.$refs['userForm'].validate((valid) => {
@@ -53,13 +72,15 @@ export default{
     //           this.$router.push("/")
     //         }
     //       })
-    //     // this.$router.push("/")
     //     } else {
     //       return false;
     //     }
     //   });
-    }
+
   
+  
+    }
+  }
 }
 </script>
 
