@@ -27,8 +27,8 @@
         </template>
           <el-menu-item index="user">用户管理</el-menu-item>
            <el-menu-item index="home">首页</el-menu-item>
-          <el-menu-item index="2-3">轮播图管理</el-menu-item>
-          <el-menu-item index="2-4">新闻管理</el-menu-item>
+        <el-menu-item index="carousel">轮播图管理</el-menu-item>
+          <el-menu-item index="news">新闻管理</el-menu-item>
       </el-submenu>
         <!-- <el-submenu index="1-4">
           <template slot="title">选项4</template>
