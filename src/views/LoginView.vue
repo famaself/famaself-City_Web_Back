@@ -51,10 +51,13 @@ export default{
             if(res.state!=200){
               this.$message.error("用户名或密码错误")
             }else{
-              this.$message.success("登录成功")
-              localStorage.setItem("user", JSON.stringify(res.data))  // 存储用户信息到浏览器
-              this.$router.push("/")
-              // console.log(router)
+              if(res.data.permission){
+                this.$message.success("登录成功")
+                localStorage.setItem("user", JSON.stringify(res.data))  // 存储用户信息到浏览器
+                this.$router.push("/")
+              }else{
+                this.$message.error("抱歉您没有权限访问")
+              }
             }
           })
           }else{
