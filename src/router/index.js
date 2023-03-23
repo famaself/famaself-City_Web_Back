@@ -34,6 +34,11 @@ const routes = [
         path: "news",
         name: "新闻管理",
         component: () => import("../views/NewsView.vue"),
+      },
+      {
+        path: "check",
+        name: "侵权检测",
+        component: () => import("../views/CheckRight.vue"),
       }
     ],
   },
