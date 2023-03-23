@@ -25,10 +25,11 @@
         <template slot="title"><i class="el-icon-user"></i>
          <span slot="title">系统管理</span>
         </template>
+          <el-menu-item index="home">首页</el-menu-item>
           <el-menu-item index="user">用户管理</el-menu-item>
-           <el-menu-item index="home">首页</el-menu-item>
-        <el-menu-item index="carousel">轮播图管理</el-menu-item>
+          <el-menu-item index="carousel">轮播图管理</el-menu-item>
           <el-menu-item index="news">新闻管理</el-menu-item>
+          <el-menu-item index="check">侵权检测</el-menu-item>
       </el-submenu>
         <!-- <el-submenu index="1-4">
           <template slot="title">选项4</template>
