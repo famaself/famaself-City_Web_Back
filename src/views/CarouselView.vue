@@ -13,10 +13,10 @@
           </div>
 
           <img  style="margin: 20px 0" v-if="image" :src="image"  alt="图片error" />
-       <div style="margin: 10px 0">
-        <table>
+       <div style="margin: 40px 0">
+        <table class="feishu-table">
     <thead>
-      <tr>
+      <tr id = "title">
         <th>日期</th>
         <th>图片URL</th>
         <th>新闻URL</th>
@@ -25,9 +25,10 @@
     </thead>
     <tbody>
       <tr v-for="(item, index) in items" >
-       <td>{{ item.date }}</td>
-        <td>{{ item.imgurl }}</td>
-        <td>{{ item.texturl }}</td>
+        <td :style="{ backgroundColor: index % 2 === 0 ? '#f6f6f6' : '#fff' }">{{ item.date }}</td>
+            <td :style="{ backgroundColor: index % 2 === 0 ? '#fff' : '#f6f6f6' }">{{ item.imgurl }}</td>
+            <td :style="{ backgroundColor: index % 2 === 0 ? '#f6f6f6' : '#fff' }">{{ item.texturl }}</td>
+        
         <td>
           <el-button  class = "container" type="danger" icon="el-icon-delete" @click="remove(index)">删除</el-button>
         </td>
@@ -49,7 +50,7 @@ import axios from 'axios'
         texturl:'',
         image : '',
         //暂时先用固定的，之后能用登录所给的
-        token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzIiwiZXhwIjoxNjgwMDc4ODA2fQ.nZz0l0HucJ52N8jTcCGGJPkN2zJ5pS_SebkOy2bMYQY",
+        token: sessionStorage.getItem("token"),
         items: [
         {date:'',imgurl:'',texturl:"",bid:""},
         {date:'',imgurl:'',texturl:"",bid:""},
@@ -108,6 +109,7 @@ import axios from 'axios'
         img.src = this.imgurl;
         img.onerror = () => {
         alert("该图片不存在");
+        this.imgurl = "";
       };
         img.onload =() =>{
           this.image = this.imgurl;
@@ -185,43 +187,48 @@ import axios from 'axios'
   
   <style scoped>
 
-  table{
-     width :100%;
-     border-collapse : collapse;
+.feishu-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 14px;
+    line-height: 1.5;
   }
-  
-  table, th, td {
-    border: 3px solid rgb(21, 160, 165);
+  #title th{
+    font-size: 20px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(178, 69, 146, 0.4) 0%, rgba(241, 95, 121, 0.2) 50%, rgba(250, 205, 75, 0.8) 100%);
   }
-  
-  th{
-   text-align:left;
-   background: linear-gradient(to right, #ff7e5f, #feb47b);
-   color:white;
+  .feishu-table th,
+  .feishu-table td {
+    padding: 12px 16px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid #e0e0e0;
   }
-  
-  td{
-   padding :5px
+  .feishu-table th {
+    background-color: #f7f7f7;
+    font-weight: bold;
   }
-  
-  tr:nth-child(even){
-    padding :5px;
-   background-color:#f2f2f2;
+  .feishu-table tbody tr:hover {
+    background-color: #fafafa;
   }
-  td .container {
-    display: block;
-    margin: 0 auto;
-    padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,.2);
-    transition: all .3s;
-    height: 15vh;
-    width: 25vh;
-}
-
-td .container:hover {
-    box-shadow: 0 4px 8px rgba(69, 146, 82, 0.2);
-}
+  .feishu-table .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .feishu-table .el-button {
+    padding: 6px 12px;
+  }
+  .feishu-table .el-button:hover {
+    background-color: #f56c6c;
+    color: #fff;
+  }
+  .feishu-table .el-button:active {
+    background-color: #f78989;
+    color: #fff;
+  }
 
   img {
     display: block;
