@@ -52,32 +52,14 @@ export default{
               this.$message.error("用户名或密码错误")
             }else{
               this.$message.success("登录成功")
-              localStorage.setItem("user", JSON.stringify(res.data))  // 存储用户信息到浏览器
-              this.$router.push("/")
-              // console.log(router)
-            }
+              sessionStorage.setItem("token", res.data.token)  // 存储用户信息到浏览器
+              this.$router.replace("/home")
+        }
           })
           }else{
             return false;
           }
         })
-    // {
-    // login() {
-    //   this.$refs['userForm'].validate((valid) => {
-    //     if (valid) {  // 表单校验合法
-    //       this.request.post("/user/login", this.user).then(res => {
-    //         if(res.code!=200) {
-    //           this.$message.error("用户名或密码错误")
-    //         } else {
-    //           this.$router.push("/")
-    //         }
-    //       })
-    //     } else {
-    //       return false;
-    //     }
-    //   });
-
-  
   
     }
   }
