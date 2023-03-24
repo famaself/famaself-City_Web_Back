@@ -1,9 +1,9 @@
 <template>
    <div>
        <div style="margin: 10px 0">
-    <table>
+    <table class="feishu-table">
     <thead>
-      <tr>
+      <tr id = "title">
         <th>日期</th>
         <th>图片URL</th>
         <th>新闻URL</th>
@@ -12,9 +12,9 @@
     </thead>
     <tbody>
       <tr v-for="(item, index) in items" :key="item.date">
-       <td>{{ item.date }}</td>
-        <td>{{ item.imgurl }}</td>
-        <td>{{ item.texturl }}</td>
+        <td :style="{ backgroundColor: index % 2 === 0 ? '#f6f6f6' : '#fff' }">{{ item.date }}</td>
+            <td :style="{ backgroundColor: index % 2 === 0 ? '#fff' : '#f6f6f6' }">{{ item.imgurl }}</td>
+            <td :style="{ backgroundColor: index % 2 === 0 ? '#f6f6f6' : '#fff' }">{{ item.texturl }}</td>
         <td>
           <el-button  class = "container" type="danger" icon="el-icon-delete" @click="remove(index)">删除</el-button>
         </td>
@@ -33,15 +33,13 @@
   </template>
   
   <script>
-  
+  import axios from 'axios'
   export default {
     created: function () {
-      /*let user = JSON.parse(localStorage.getItem("user"));
-      this.token = user.token;*/
-    // 在这里执行所需的函数
+
         axios.get('http://114.132.75.216:9999/news/get_banner_list')
         .then(response => {
-          console.log(response.data.data);
+
           // 处理响应数据
             for(var i = 0; i < response.data.data.length; i++){
               if(response["data"][i] !== ""){
@@ -72,7 +70,8 @@
         },
         currentPage: 1,
         pageSize: 10,
-        items: new Array(100).fill({date:'',imgurl:'',texturl:"",bid:""})
+        items: new Array(100).fill({date:'',imgurl:'',texturl:"",bid:""}),
+        token : sessionStorage.getItem("token"),
       }
     },
     methods: {
@@ -80,7 +79,6 @@
     this.currentPage = val;
     },
     resetimg() {
-        console.log(this.token);
         this.imgurl = "";
       },
       resettext() {
@@ -135,7 +133,6 @@
                 token: this.token
               }
             }).then(response => {
-              console.log(response.data);
         })
         .catch(error => {
           alert(error);
@@ -149,13 +146,12 @@
   },
       remove(index){
         let url = 'http://114.132.75.216:9999/news/delete_banner?bid='+this.items[index].bid.toString();
-        console.log(url);
         axios.get(url, {
               headers: {
                 token: this.token
               }
             }).then(response => {
-              console.log(response.data);
+
         })
         .catch(error => {
           alert(error);
@@ -181,43 +177,49 @@
 
 <style scoped>
 
-table{
-   width :100%;
-   border-collapse : collapse;
-}
-
-table, th, td {
-  border: 3px solid rgb(21, 160, 165);
-}
-
-th{
- text-align:left;
- background: linear-gradient(to right, #ff7e5f, #feb47b);
- color:white;
-}
-
-td{
- padding :5px
-}
-
-tr:nth-child(even){
-  padding :5px;
- background-color:#f2f2f2;
-}
-td .container {
-  display: block;
-  margin: 0 auto;
-  padding: 10px 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0,0,0,.2);
-  transition: all .3s;
-  height: 15vh;
-  width: 25vh;
-}
-
-td .container:hover {
-  box-shadow: 0 4px 8px rgba(69, 146, 82, 0.2);
-}
+.feishu-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 20px;
+    line-height: 3;
+  }
+  #title th{
+    font-size: 20px;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(178, 69, 146, 0.4) 0%, rgba(241, 95, 121, 0.2) 50%, rgba(250, 205, 75, 0.8) 100%);
+  }
+  .feishu-table th,
+  .feishu-table td {
+    padding: 12px 16px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .feishu-table th {
+    background-color: #f7f7f7;
+    font-weight: bold;
+  }
+  .feishu-table tbody tr:hover {
+    background-color: #fafafa;
+  }
+  .feishu-table .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .feishu-table .el-button {
+    padding: 6px 12px;
+  }
+  .feishu-table .el-button:hover {
+    background-color: #f56c6c;
+    color: #fff;
+  }
+  .feishu-table .el-button:active {
+    background-color: #f78989;
+    color: #fff;
+  }
 
 
 </style>
