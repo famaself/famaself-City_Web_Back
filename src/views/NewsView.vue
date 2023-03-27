@@ -1,3 +1,32 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Codespaces
+Marketplace
+Explore
+ 
+@TOP-ambitous 
+famaself
+/
+famaself-City_Web_Back
+Public
+Fork your own copy of famaself/famaself-City_Web_Back
+Code
+Issues
+Pull requests
+Actions
+Projects
+Security
+Insights
+famaself-City_Web_Back/src/views/NewsView.vue
+@TOP-ambitous
+TOP-ambitous Update NewsView.vue
+Latest commit b989b21 yesterday
+ History
+ 1 contributor
+325 lines (310 sloc)  8.38 KB
+
 <template>
   <div>
     <div  v-if="!show" style="margin: 20px 0">
@@ -252,26 +281,21 @@
 </script>
 
 <style scoped>
-
 table{
   width :100%;
   border-collapse : collapse;
 }
-
 table, th, td {
  border: 3px solid rgb(21, 160, 165);
 }
-
 th{
 text-align:left;
 background: linear-gradient(to right, #ff7e5f, #feb47b);
 color:white;
 }
-
 td{
 padding :5px
 }
-
 tr:nth-child(even){
  padding :5px;
 background-color:#f2f2f2;
@@ -286,40 +310,48 @@ td .container {
  height: 15vh;
  width: 25vh;
 }
-
 td .container:hover {
  box-shadow: 0 4px 8px rgba(69, 146, 82, 0.2);
 }
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
-
 .el-select {
   width: 200px;
   font-family: 'Open Sans', sans-serif;
 }
-
 .el-select .el-input__inner {
   border-radius: 20px;
   border: 2px solid #42b983;
   transition: all 0.3s ease-in-out;
   padding-left: 35px;
 }
-
 .el-select .el-input__inner:hover {
   box-shadow: 0px 0px 5px #42b983;
 }
-
 .el-select .el-input__inner:before {
   content: '🔍';
   position: absolute;
   left: 10px;
   top: calc(50% - 9px);
 }
-
 .el-select-dropdown__item.selected:not(.is-disabled) {
   background-color: #42b983;
 }
-
 .el-select-dropdown__item:hover:not(.selected):not(.is-disabled) {
   background-color: #e6f1ea;
 }
 </style>
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+famaself-City_Web_Back/NewsView.vue at main · famaself/famaself-City_Web_Back
