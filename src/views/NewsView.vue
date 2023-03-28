@@ -184,10 +184,8 @@ Latest commit b989b21 yesterday
                 "image":url,
                 "url":this.texturl
               }
-              axios.post('http://114.132.75.216:9999/news/add_banner', data, {
-              headers: {
-                token: this.token
-              }
+              this.request.post('http://114.132.75.216:9999/news/add_banner', data, {
+
             }).then(response => {
               console.log(response.data);
         })
